@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Prestige - Ventas y Oportunidad de Negocio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-crown"></i>
+                <span>Royal Prestige</span>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#oportunidad">Oportunidad</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1 class="hero-title">Royal Prestige</h1>
+            <p class="hero-subtitle">Vive la Excelencia, Genera Ingresos Ilimitados</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('productos')">Conoce Nuestros Productos</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('oportunidad')">Únete Ahora</button>
+            </div>
+        </div>
+        <div class="hero-background">
+            <div class="gradient-overlay"></div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE ESTADÍSTICAS -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card" data-count="15000">
+                    <i class="fas fa-users"></i>
+                    <h3 class="stat-number">0</h3>
+                    <p>Clientes Satisfechos</p>
+                </div>
+                <div class="stat-card" data-count="500">
+                    <i class="fas fa-chart-line"></i>
+                    <h3 class="stat-number">0</h3>
+                    <p>Distribuidores Activos</p>
+                </div>
+                <div class="stat-card" data-count="98">
+                    <i class="fas fa-star"></i>
+                    <h3 class="stat-number">0</h3>
+                    <p>% Satisfacción</p>
+                </div>
+                <div class="stat-card" data-count="25">
+                    <i class="fas fa-globe"></i>
+                    <h3 class="stat-number">0</h3>
+                    <p>Años de Trayectoria</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE PRODUCTOS -->
+    <section class="productos" id="productos">
+        <div class="container">
+            <h2 class="section-title">Nuestros Productos Premium</h2>
+            <p class="section-subtitle">Calidad, lujo y funcionalidad en cada detalle</p>
+            
+            <div class="productos-grid">
+                <!-- Producto 1 -->
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-pot-food"></i>
+                    </div>
+                    <h3>Batería de Cocina</h3>
+                    <p>Acero quirúrgico de alta calidad con revestimiento antiadherente premium</p>
+                    <ul class="caracteristicas">
+                        <li><i class="fas fa-check"></i> Duradero y resistente</li>
+                        <li><i class="fas fa-check"></i> Calor distribuido uniformemente</li>
+                        <li><i class="fas fa-check"></i> Fácil de limpiar</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="abrirModal('producto1')">Ver Más</button>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Juego de Cuchillos</h3>
+                    <p>Cuchillos profesionales con mango ergonómico y cuchilla ultra afilada</p>
+                    <ul class="caracteristicas">
+                        <li><i class="fas fa-check"></i> Acero inoxidable</li>
+                        <li><i class="fas fa-check"></i> Mango antideslizante</li>
+                        <li><i class="fas fa-check"></i> Garantía de por vida</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="abrirModal('producto2')">Ver Más</button>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-wine-glass"></i>
+                    </div>
+                    <h3>Cristalería Exclusiva</h3>
+                    <p>Cristal fino para ocasiones especiales y uso diario elegante</p>
+                    <ul class="caracteristicas">
+                        <li><i class="fas fa-check"></i> Cristal de alta densidad</li>
+                        <li><i class="fas fa-check"></i> Diseño elegante</li>
+                        <li><i class="fas fa-check"></i> Lavable en lavavajillas</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="abrirModal('producto3')">Ver Más</button>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-plate-wheat"></i>
+                    </div>
+                    <h3>Menaje de Casa</h3>
+                    <p>Artículos para el hogar que combinan funcionalidad con elegancia</p>
+                    <ul class="caracteristicas">
+                        <li><i class="fas fa-check"></i> Diseño moderno</li>
+                        <li><i class="fas fa-check"></i> Materiales premium</li>
+                        <li><i class="fas fa-check"></i> Variedad de colores</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="abrirModal('producto4')">Ver Más</button>
+                </div>
+
+                <!-- Producto 5 -->
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-droplet"></i>
+                    </div>
+                    <h3>Artículos de Belleza</h3>
+                    <p>Productos de cuidado personal con ingredientes naturales premium</p>
+                    <ul class="caracteristicas">
+                        <li><i class="fas fa-check"></i> Fórmula dermatológica</li>
+                        <li><i class="fas fa-check"></i> Sin químicos dañinos</li>
+                        <li><i class="fas fa-check"></i> Resultados visibles</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="abrirModal('producto5')">Ver Más</button>
+                </div>
+
+                <!-- Producto 6 -->
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Complementos del Hogar</h3>
+                    <p>Decoración y complementos que transforman tu espacio</p>
+                    <ul class="caracteristicas">
+                        <li><i class="fas fa-check"></i> Diseños exclusivos</li>
+                        <li><i class="fas fa-check"></i> Materiales resistentes</li>
+                        <li><i class="fas fa-check"></i> Garantía de calidad</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="abrirModal('producto6')">Ver Más</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE OPORTUNIDAD DE NEGOCIO -->
+    <section class="oportunidad" id="oportunidad">
+        <div class="container">
+            <h2 class="section-title">Tu Oportunidad de Negocio</h2>
+            <p class="section-subtitle">Genera ingresos ilimitados siendo parte de nuestra familia</p>
+            
+            <div class="oportunidad-content">
+                <div class="beneficios-grid">
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3>Ingresos Ilimitados</h3>
+                        <p>Gana comisiones por cada venta realizada sin techo de ingresos</p>
+                    </div>
+
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">
+                            <i class="fas fa-people-group"></i>
+                        </div>
+                        <h3>Red de Apoyo</h3>
+                        <p>Capacitación continua y mentoría de distribuidores exitosos</p>
+                    </div>
+
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Libertad de Horarios</h3>
+                        <p>Organiza tu tiempo de trabajo de acuerdo a tus necesidades</p>
+                    </div>
+
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>Bonificaciones y Premios</h3>
+                        <p>Viajes, autos y bonos por alcanzar metas de venta</p>
+                    </div>
+
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3>Tu Propio Negocio</h3>
+                        <p>Sé emprendedor con el respaldo de una marca reconocida</p>
+                    </div>
+
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Productos Premium</h3>
+                        <p>Vende productos de calidad que la gente ama</p>
+                    </div>
+                </div>
+
+                <div class="plan-section">
+                    <h3>Planes de Afiliación</h3>
+                    <div class="planes-grid">
+                        <div class="plan-card">
+                            <h4>Plan Starter</h4>
+                            <p class="precio">Inversión: $500</p>
+                            <ul>
+                                <li>Kit inicial de productos</li>
+                                <li>Acceso a capacitación básica</li>
+                                <li>Comisión: 20%</li>
+                                <li>Soporte por email</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="abrirFormulario('starter')">Registrarse</button>
+                        </div>
+
+                        <div class="plan-card destacado">
+                            <span class="badge-popular">MÁS POPULAR</span>
+                            <h4>Plan Premier</h4>
+                            <p class="precio">Inversión: $1,500</p>
+                            <ul>
+                                <li>Kit completo de productos</li>
+                                <li>Capacitación premium + mentoría</li>
+                                <li>Comisión: 30%</li>
+                                <li>Soporte prioritario 24/7</li>
+                                <li>Acceso a eventos exclusivos</li>
+                            </ul>
+                            <button class="btn btn-secondary" onclick="abrirFormulario('premier')">Registrarse</button>
+                        </div>
+
+                        <div class="plan-card">
+                            <h4>Plan Elite</h4>
+                            <p class="precio">Inversión: $3,000</p>
+                            <ul>
+                                <li>Kit premium completo</li>
+                                <li>Entrenamiento VIP personalizado</li>
+                                <li>Comisión: 40%</li>
+                                <li>Gestor de ventas dedicado</li>
+                                <li>Bonificaciones exclusivas</li>
+                                <li>Viajes anuales</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="abrirFormulario('elite')">Registrarse</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE TESTIMONIOS -->
+    <section class="testimonios" id="testimonios">
+        <div class="container">
+            <h2 class="section-title">Historias de Éxito</h2>
+            <p class="section-subtitle">Conoce a personas que han transformado sus vidas</p>
+            
+            <div class="testimonios-grid">
+                <div class="testimonio-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonio-texto">"Royal Prestige cambió mi vida. En 6 meses logré triplicar mis ingresos y ahora tengo el tiempo que siempre soñé para mi familia."</p>
+                    <div class="testimonio-autor">
+                        <div class="avatar avatar1"></div>
+                        <div>
+                            <p class="nombre">María García</p>
+                            <p class="rol">Distribuidora Premium - 2 años</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonio-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonio-texto">"Los productos son increíbles, pero lo mejor es la comunidad. El apoyo que recibí para crecer en mi negocio fue invaluable."</p>
+                    <div class="testimonio-autor">
+                        <div class="avatar avatar2"></div>
+                        <div>
+                            <p class="nombre">Carlos López</p>
+                            <p class="rol">Distribuidor Elite - 3 años</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonio-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonio-texto">"Soy cliente desde hace años y los productos son lo mejor. Ahora soy distribuidora y genero ingresos pasivos vendiendo lo que amo."</p>
+                    <div class="testimonio-autor">
+                        <div class="avatar avatar3"></div>
+                        <div>
+                            <p class="nombre">Alejandra Martínez</p>
+                            <p class="rol">Distribuidora Premier - 1 año</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE CONTACTO -->
+    <section class="contacto" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Contáctanos</h2>
+            <p class="section-subtitle">Estamos aquí para responder tus preguntas</p>
+            
+            <div class="contacto-content">
+                <div class="contacto-info">
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <h4>Teléfono</h4>
+                        <p>+34 900 123 456</p>
+                        <p class="small">Lunes a Viernes 9:00 - 18:00</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p>info@royalwolf.com</p>
+                        <p class="small">Respuesta en 24 horas</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Ubicación</h4>
+                        <p>Madrid, España</p>
+                        <p class="small">Disponible para visitas</p>
+                    </div>
+                </div>
+
+                <form class="contacto-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Tu email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Tu teléfono">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Tu mensaje" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Royal Prestige</h4>
+                    <p>Transformando vidas a través de productos premium y oportunidades de negocio.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#oportunidad">Oportunidad</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Política de Devoluciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Royal Prestige. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALES -->
+    <div id="modalProducto" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal('modalProducto')">&times;</span>
+            <h2 id="modalTitle">Producto</h2>
+            <p id="modalDescription"></p>
+            <button class="btn btn-primary" onclick="cerrarModal('modalProducto')">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modalFormulario" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal('modalFormulario')">&times;</span>
+            <h2>Únete a Royal Prestige</h2>
+            <form id="formularioAfiliacion">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" placeholder="Tu nombre" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Tu email" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" placeholder="Tu teléfono" required>
+                </div>
+                <div class="form-group">
+                    <label>Plan Seleccionado</label>
+                    <input type="text" id="planSeleccionado" readonly>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirmar Registro</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
