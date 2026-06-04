@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victoria Ascent Global - Mapa Visual Interactivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .visualization {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(90deg, #2c3e50 0%, #34495e 100%);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar-logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-logo::before {
+            content: "👑";
+            font-size: 28px;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 30px;
+            font-size: 14px;
+        }
+
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .navbar-menu a:hover {
+            color: #3498db;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #27ae60;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-secondary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        /* STATS */
+        .stats {
+            background: #f8f9fa;
+            padding: 60px 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .stat-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .stat-card .label {
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+
+        /* SECTION TITLE */
+        .section-title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+
+        /* PRODUCTOS */
+        .productos {
+            padding: 60px 30px;
+            background: white;
+        }
+
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .producto-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .producto-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .producto-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+        }
+
+        .producto-content {
+            padding: 25px;
+        }
+
+        .producto-content h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .producto-content p {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .caracteristicas {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .caracteristicas li {
+            color: #555;
+            padding: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .caracteristicas li::before {
+            content: "✓ ";
+            color: #2ecc71;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* OPORTUNIDAD */
+        .oportunidad {
+            background: #f8f9fa;
+            padding: 60px 30px;
+        }
+
+        .beneficios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .beneficio-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .beneficio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-top: 4px solid #667eea;
+        }
+
+        .beneficio-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .beneficio-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .beneficio-card p {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .planes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .plan-card.destacado {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            border-top: 5px solid #667eea;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .plan-card.destacado:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .badge-popular {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2ecc71;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .plan-card h4 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin: 20px 0 10px;
+        }
+
+        .plan-card .precio {
+            color: #667eea;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .plan-card ul {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .plan-card ul li {
+            color: #555;
+            padding: 8px 0;
+            font-size: 0.95em;
+        }
+
+        .plan-card ul li::before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* TESTIMONIOS */
+        .testimonios {
+            background: white;
+            padding: 60px 30px;
+        }
+
+        .testimonios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .testimonio-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .testimonio-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .stars {
+            color: #f39c12;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .testimonio-texto {
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .testimonio-autor {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .autor-info p {
+            margin: 3px 0;
+        }
+
+        .autor-info .nombre {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .autor-info .rol {
+            color: #7f8c8d;
+            font-size: 0.85em;
+        }
+
+        /* CONTACTO */
+        .contacto {
+            background: #f8f9fa;
+            padding: 60px 30px;
+        }
+
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .info-card .icon {
+            font-size: 2.5em;
+            color: #667eea;
+        }
+
+        .info-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .info-card .small {
+            color: #7f8c8d;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+
+        .contacto-form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(90deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 60px 30px 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #3498db;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #3498db;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 30px;
+            text-align: center;
+            color: #ecf0f1;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .productos-grid,
+            .beneficios-grid,
+            .planes-grid,
+            .testimonios-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-card.destacado {
+                transform: scale(1);
+            }
+
+            .plan-card.destacado:hover {
+                transform: translateY(-10px);
+            }
+
+            .contacto-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar-menu {
+                gap: 15px;
+                font-size: 12px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌟 Victoria Ascent Global</h1>
+            <p>Representación Visual Completa del Sitio Web</p>
+        </div>
+
+        <div class="visualization">
+            <!-- NAVBAR -->
+            <div class="navbar">
+                <div class="navbar-logo">Victoria Ascent Global</div>
+                <div class="navbar-menu">
+                    <a>Inicio</a>
+                    <a>Productos</a>
+                    <a>Oportunidad</a>
+                    <a>Testimonios</a>
+                    <a>Contacto</a>
+                </div>
+            </div>
+
+            <!-- HERO -->
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Victoria Ascent Global</h1>
+                    <p>Vive la Excelencia, Genera Ingresos Ilimitados</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary">Conoce Nuestros Productos</button>
+                        <button class="btn btn-secondary">Únete Ahora</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats">
+                <h2 class="section-title">Nuestros Números</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="icon">👥</div>
+                        <div class="number">15,000+</div>
+                        <div class="label">Clientes Satisfechos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">📈</div>
+                        <div class="number">500+</div>
+                        <div class="label">Distribuidores Activos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">⭐</div>
+                        <div class="number">98%</div>
+                        <div class="label">Satisfacción</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">🌍</div>
+                        <div class="number">25 años</div>
+                        <div class="label">Trayectoria</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCTOS -->
+            <div class="productos">
+                <h2 class="section-title">Nuestros Productos Premium</h2>
+                <p class="section-subtitle">Calidad, lujo y funcionalidad en cada detalle</p>
+                <div class="productos-grid">
+                    <div class="producto-card">
+                        <div class="producto-image">🍳</div>
+                        <div class="producto-content">
+                            <h3>Batería de Cocina</h3>
+                            <p>Acero quirúrgico de alta calidad con revestimiento antiadherente premium</p>
+                            <ul class="caracteristicas">
+                                <li>Duradero y resistente</li>
+                                <li>Calor distribuido uniformemente</li>
+                                <li>Fácil de limpiar</li>
+                            </ul>
+                            <button class="btn btn-primary">Ver Más</button>
+                        </div>
+                    </div>
+                    <div class="producto-card">
+                        <div class="producto-image">🔪</div>
+                        <div class="producto-content">
+                            <h3>Juego de Cuchillos</h3>
+                            <p>Cuchillos profesionales con mango ergonómico y cuchilla ultra afilada</p>
+                            <ul class="caracteristicas">
+                                <li>Acero inoxidable</li>
+                                <li>Mango antideslizante</li>
+                                <li>Garantía de por vida</li>
+                            </ul>
+                            <button class="btn btn-primary">Ver Más</button>
+                        </div>
+                    </div>
+                    <div class="producto-card">
+                        <div class="producto-image">🍷</div>
+                        <div class="producto-content">
+                            <h3>Cristalería Exclusiva</h3>
+                            <p>Cristal fino para ocasiones especiales y uso diario elegante</p>
+                            <ul class="caracteristicas">
+                                <li>Cristal de alta densidad</li>
+                                <li>Diseño elegante</li>
+                                <li>Lavable en lavavajillas</li>
+                            </ul>
+                            <button class="btn btn-primary">Ver Más</button>
+                        </div>
+                    </div>
+                    <div class="producto-card">
+                        <div class="producto-image">🏠</div>
+                        <div class="producto-content">
+                            <h3>Menaje de Casa</h3>
+                            <p>Artículos para el hogar que combinan funcionalidad con elegancia</p>
+                            <ul class="caracteristicas">
+                                <li>Diseño moderno</li>
+                                <li>Materiales premium</li>
+                                <li>Variedad de colores</li>
+                            </ul>
+                            <button class="btn btn-primary">Ver Más</button>
+                        </div>
+                    </div>
+                    <div class="producto-card">
+                        <div class="producto-image">💄</div>
+                        <div class="producto-content">
+                            <h3>Artículos de Belleza</h3>
+                            <p>Productos de cuidado personal con ingredientes naturales premium</p>
+                            <ul class="caracteristicas">
+                                <li>Fórmula dermatológica</li>
+                                <li>Sin químicos dañinos</li>
+                                <li>Resultados visibles</li>
+                            </ul>
+                            <button class="btn btn-primary">Ver Más</button>
+                        </div>
+                    </div>
+                    <div class="producto-card">
+                        <div class="producto-image">✨</div>
+                        <div class="producto-content">
+                            <h3>Complementos del Hogar</h3>
+                            <p>Decoración y complementos que transforman tu espacio</p>
+                            <ul class="caracteristicas">
+                                <li>Diseños exclusivos</li>
+                                <li>Materiales resistentes</li>
+                                <li>Garantía de calidad</li>
+                            </ul>
+                            <button class="btn btn-primary">Ver Más</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPORTUNIDAD -->
+            <div class="oportunidad">
+                <h2 class="section-title">Tu Oportunidad de Negocio</h2>
+                <p class="section-subtitle">Genera ingresos ilimitados siendo parte de nuestra familia</p>
+                
+                <h3 style="text-align: center; color: #2c3e50; margin: 50px 0 30px; font-size: 1.8em;">Beneficios Exclusivos</h3>
+                <div class="beneficios-grid">
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">💰</div>
+                        <h3>Ingresos Ilimitados</h3>
+                        <p>Gana comisiones por cada venta realizada sin techo de ingresos</p>
+                    </div>
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">👥</div>
+                        <h3>Red de Apoyo</h3>
+                        <p>Capacitación continua y mentoría de distribuidores exitosos</p>
+                    </div>
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">⏰</div>
+                        <h3>Libertad de Horarios</h3>
+                        <p>Organiza tu tiempo de trabajo de acuerdo a tus necesidades</p>
+                    </div>
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">🎁</div>
+                        <h3>Bonificaciones y Premios</h3>
+                        <p>Viajes, autos y bonos por alcanzar metas de venta</p>
+                    </div>
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">📊</div>
+                        <h3>Tu Propio Negocio</h3>
+                        <p>Sé emprendedor con el respaldo de una marca reconocida</p>
+                    </div>
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">⭐</div>
+                        <h3>Productos Premium</h3>
+                        <p>Vende productos de calidad que la gente ama</p>
+                    </div>
+                </div>
+
+                <h3 style="text-align: center; color: #2c3e50; margin: 60px 0 30px; font-size: 1.8em;">Planes de Afiliación</h3>
+                <div class="planes-grid">
+                    <div class="plan-card">
+                        <h4>Plan Starter</h4>
+                        <div class="precio">$500</div>
+                        <ul>
+                            <li>Kit inicial de productos</li>
+                            <li>Acceso a capacitación básica</li>
+                            <li>Comisión: 20%</li>
+                            <li>Soporte por email</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Registrarse</button>
+                    </div>
+                    <div class="plan-card destacado">
+                        <span class="badge-popular">MÁS POPULAR</span>
+                        <h4>Plan Premier</h4>
+                        <div class="precio">$1,500</div>
+                        <ul>
+                            <li>Kit completo de productos</li>
+                            <li>Capacitación premium + mentoría</li>
+                            <li>Comisión: 30%</li>
+                            <li>Soporte prioritario 24/7</li>
+                            <li>Acceso a eventos exclusivos</li>
+                        </ul>
+                        <button class="btn btn-secondary" style="width: 100%;">Registrarse</button>
+                    </div>
+                    <div class="plan-card">
+                        <h4>Plan Elite</h4>
+                        <div class="precio">$3,000</div>
+                        <ul>
+                            <li>Kit premium completo</li>
+                            <li>Entrenamiento VIP personalizado</li>
+                            <li>Comisión: 40%</li>
+                            <li>Gestor de ventas dedicado</li>
+                            <li>Bonificaciones exclusivas</li>
+                            <li>Viajes anuales</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Registrarse</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TESTIMONIOS -->
+            <div class="testimonios">
+                <h2 class="section-title">Historias de Éxito</h2>
+                <p class="section-subtitle">Conoce a personas que han transformado sus vidas</p>
+                <div class="testimonios-grid">
+                    <div class="testimonio-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonio-texto">"Victoria Ascent Global cambió mi vida. En 6 meses logré triplicar mis ingresos y ahora tengo el tiempo que siempre soñé para mi familia."</p>
+                        <div class="testimonio-autor">
+                            <div class="avatar"></div>
+                            <div class="autor-info">
+                                <p class="nombre">María García</p>
+                                <p class="rol">Distribuidora Premium - 2 años</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonio-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonio-texto">"Los productos son increíbles, pero lo mejor es la comunidad. El apoyo que recibí para crecer en mi negocio fue invaluable."</p>
+                        <div class="testimonio-autor">
+                            <div class="avatar"></div>
+                            <div class="autor-info">
+                                <p class="nombre">Carlos López</p>
+                                <p class="rol">Distribuidor Elite - 3 años</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonio-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonio-texto">"Soy cliente desde hace años y los productos son lo mejor. Ahora soy distribuidora y genero ingresos pasivos vendiendo lo que amo."</p>
+                        <div class="testimonio-autor">
+                            <div class="avatar"></div>
+                            <div class="autor-info">
+                                <p class="nombre">Alejandra Martínez</p>
+                                <p class="rol">Distribuidora Premier - 1 año</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTACTO -->
+            <div class="contacto">
+                <h2 class="section-title">Contáctanos</h2>
+                <p class="section-subtitle">Estamos aquí para responder tus preguntas</p>
+                <div class="contacto-grid">
+                    <div class="info-cards">
+                        <div class="info-card">
+                            <div class="icon">📞</div>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p>+34 900 123 456</p>
+                                <p class="small">Lunes a Viernes 9:00 - 18:00</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="icon">✉️</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@victoriaglobal.com</p>
+                                <p class="small">Respuesta en 24 horas</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="icon">📍</div>
+                            <div>
+                                <h4>Ubicación</h4>
+                                <p>Madrid, España</p>
+                                <p class="small">Disponible para visitas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contacto-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Tu email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Tu teléfono">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Tu mensaje" required></textarea>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%;">Enviar Mensaje</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="footer">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h4>Victoria Ascent Global</h4>
+                        <p>Transformando vidas a través de productos premium y oportunidades de negocio.</p>
+                        <div class="social-links">
+                            <a title="Facebook">f</a>
+                            <a title="Instagram">📷</a>
+                            <a title="WhatsApp">💬</a>
+                            <a title="LinkedIn">in</a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Enlaces Rápidos</h4>
+                        <ul>
+                            <li><a href="#">Productos</a></li>
+                            <li><a href="#">Oportunidad</a></li>
+                            <li><a href="#">Testimonios</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Política de Privacidad</a></li>
+                            <li><a href="#">Términos de Servicio</a></li>
+                            <li><a href="#">Política de Devoluciones</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Victoria Ascent Global. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
