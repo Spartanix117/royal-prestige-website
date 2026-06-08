@@ -116,7 +116,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23d4af37" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="1200" height="600" fill="url(%23grid)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="1200" height="600" fill="url(%23grid)"/></svg>');
     animation: slideBackground 20s linear infinite;
 }
 
@@ -252,6 +252,145 @@ body {
 .stat-card p {
     color: #666;
     font-weight: 500;
+}
+
+/* SECCIÓN SOBRE VICTORIA */
+.about {
+    padding: 4rem 0;
+    background: var(--light-color);
+}
+
+.sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.sobre-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.sobre-frame {
+    position: relative;
+    width: 300px;
+    height: 400px;
+}
+
+.sobre-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+    transition: var(--transition);
+}
+
+.sobre-frame:hover .sobre-imagen {
+    transform: scale(1.02);
+}
+
+.sobre-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: floatBadge 3s ease-in-out infinite;
+}
+
+@keyframes floatBadge {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.badge-icon {
+    font-size: 1.5rem;
+}
+
+.sobre-content h3 {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle-bio {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.bio-texto {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.achievements {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+    padding: 2rem 0;
+    border-top: 2px solid #e0e0e0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.achievement-item {
+    text-align: center;
+}
+
+.achievement-item i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.achievement-item h4 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.achievement-item p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.social-bio {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 1.3rem;
+}
+
+.social-link:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-5px);
 }
 
 /* SECCIÓN DE PRODUCTOS */
@@ -790,6 +929,20 @@ body {
     .section-title {
         font-size: 2rem;
     }
+
+    .sobre-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .sobre-frame {
+        width: 250px;
+        height: 350px;
+    }
+
+    .achievements {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 480px) {
@@ -811,5 +964,18 @@ body {
 
     .section-title {
         font-size: 1.5rem;
+    }
+
+    .sobre-frame {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+    }
+
+    .sobre-badge {
+        bottom: -30px;
+        right: -30px;
+        padding: 1rem;
+        font-size: 0.9rem;
     }
 }
